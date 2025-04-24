@@ -30,7 +30,7 @@ export LC_ALL=C
 ## Global Read-only Variables
 
 prgnam="plex-nowplaying-cli"
-version="1.3.6"
+version="1.3.7"
 
 ## Optional command-line variables
 plex_host="127.0.0.1"           # Plex server IP(s), separated by space
@@ -91,11 +91,11 @@ log_error_color="$red"
 get_conf() {
     __conffile="$1"
     ## Global configuration options
-    NP_PLEX_HOST=""
-    NP_PLEX_PORT=""
-    NP_PLEX_TOKEN="" 
-    NP_PLEX_MAX_WIDTH=""
-    NP_PLEX_COLOR_MODE=""
+    NP_PLEX_HOST="${NP_PLEX_HOST:-}"
+    NP_PLEX_PORT="${NP_PLEX_PORT:-}"
+    NP_PLEX_TOKEN="${NP_PLEX_TOKEN:-}" 
+    NP_PLEX_MAX_WIDTH="${NP_PLEX_MAX_WIDTH:-}"
+    NP_PLEX_COLOR_MODE="${NP_PLEX_COLOR_MODE:-}"
 
     if [ -r "$__conffile" ]; then
        while IFS='=' read -r key val; do
