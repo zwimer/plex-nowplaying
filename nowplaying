@@ -121,8 +121,8 @@ color_check() {
        false|off|no)
             return 1 ;;
                   *)
-            if [ -x "$(command -v tput)" ]; then
-                if [ "$(tput colors)" ]; then
+            if [ -n "$TERM" ] && [ -x "$(command -v tput)" ]; then
+                if [ "$(TERM="$TERM" tput colors)" ]; then  # TERM might not be exported so we define it
                     return 0
                 fi
             fi
@@ -348,8 +348,8 @@ print_nowplaying() {
     __columns=""
 
     # Set column width
-    if [ "$(command -v tput)" ]; then
-    __columns="$("$(command -v tput)" cols)"
+    if [ -n "$TERM" ] && [ "$(command -v tput)" ]; then
+    __columns="$(TERM="$TERM" "$(command -v tput)" cols)"  # TERM might not be exported so we define it
         if [ "$max_width" -ne 0 ] && [ "$__columns" -gt "$max_width" ]; then
             __columns="$max_width"
         fi
